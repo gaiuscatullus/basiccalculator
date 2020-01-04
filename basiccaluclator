@@ -1,0 +1,51 @@
+def add(x,y):
+    return x+y
+
+def subtract(x,y):
+    return x-y
+
+def multiply(x,y):
+    return x*y
+
+def divide(x,y):
+    try:
+        return x/y
+    except:
+        print("Cannot divide by zero!")
+
+def calc():
+    calculating = True
+
+    while True:
+        try:
+            first = int(input("First num: "))
+            break
+        except ValueError:
+            print("Must input integer")
+    while calculating == True:
+        operation = input("Operation: ")
+        while operation != '+' or '-' or '*' or '/':
+            operation = input("Operation must be +,-,*,/: ")
+        second = int(input("Second num: "))
+        if operation == '+':
+            op = add(first,second)
+            print(op)
+            first = op
+            calculating = True
+        elif operation == '-':
+            op =  subtract(first,second)
+            print(op)
+            first = op
+            calculating = True
+        elif operation == '*':
+           op = multiply(first,second)
+           print(op)
+           first = op
+           calculating = True
+        elif operation == '/':
+            op = divide(first,second)
+            print(op)
+            first = op
+            calculating = True
+
+calc()
