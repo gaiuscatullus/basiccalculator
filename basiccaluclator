@@ -1,3 +1,4 @@
+
 def add(x,y):
     return x+y
 
@@ -8,10 +9,10 @@ def multiply(x,y):
     return x*y
 
 def divide(x,y):
-    try:
         return x/y
-    except:
-        print("Cannot divide by zero!")
+
+def square(x):
+    return x**2
 
 def calc():
     calculating = True
@@ -22,30 +23,58 @@ def calc():
             break
         except ValueError:
             print("Must input integer")
+
     while calculating == True:
+
+        operators = ['+','-','/','*']
+        singleops = ['**']
+
         operation = input("Operation: ")
-        while operation != '+' or '-' or '*' or '/':
+        while (operation not in operators) and (operation not in singleops):
             operation = input("Operation must be +,-,*,/: ")
-        second = int(input("Second num: "))
-        if operation == '+':
-            op = add(first,second)
-            print(op)
-            first = op
-            calculating = True
-        elif operation == '-':
-            op =  subtract(first,second)
-            print(op)
-            first = op
-            calculating = True
-        elif operation == '*':
-           op = multiply(first,second)
-           print(op)
-           first = op
-           calculating = True
-        elif operation == '/':
-            op = divide(first,second)
-            print(op)
-            first = op
-            calculating = True
+
+        if operation in operators:
+
+            while True: # for operations which require second number
+                try:
+                    second = int(input("Next num: "))
+                    break
+                except:
+                    print("Must be int.")
+
+            if operation == '+':
+                op = add(first, second)
+                print(op)
+                first = op
+                calculating = True
+            elif operation == '-':
+                op = subtract(first, second)
+                print(op)
+                first = op
+                calculating = True
+            elif operation == '*':
+                op = multiply(first, second)
+                print(op)
+                first = op
+                calculating = True
+            elif operation == '/':
+                while True:
+                    try:  # test for 0
+                        op = divide(first, second)
+                        print(op)
+                        first = op
+                        calculating = True
+                        break
+                    except:
+                        print("Cannot divide by zero!")
+                        second = int(input("Second num: "))
+
+        if operation in singleops:
+            if operation == '**':
+                op = square(first)
+                print(op)
+                first = op
+                calculating == True
+
 
 calc()
